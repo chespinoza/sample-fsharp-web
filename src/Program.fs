@@ -1,3 +1,11 @@
-﻿open Suave
+﻿open System
+open Suave
+open Suave.Successful
+open Suave.Operators
+open Suave.Filters
 
-startWebServer defaultConfig (Successful.OK "Hello World")
+let app =
+    choose [
+        GET >=> path "/time" >=> OK(sprintf "Server time: %O" DateTime.Now)
+    ]
+    |> startWebServer defaultConfig
